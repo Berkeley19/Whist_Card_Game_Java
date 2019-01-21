@@ -1,6 +1,7 @@
 package com.company;
 import java.io.*;
 import java.util.EnumSet;
+import java.util.Random;
 
 
 public class Card implements Serializable{
@@ -13,6 +14,7 @@ public class Card implements Serializable{
         NINE(9),TEN(10), JACK(10), QUEEN(10), KING(10), ACE(11);
 
         private int rankValue;
+        private static final Rank[] rankList = Rank.values();
 
 
         Rank(int value) {
@@ -24,7 +26,6 @@ public class Card implements Serializable{
         }
 
         public Enum getNext(){
-            Rank[] rankList = Rank.values();
             if(this.ordinal() == rankList.length-1){
                 return Rank.TWO;
             }else{
@@ -38,12 +39,22 @@ public class Card implements Serializable{
 
 
     }
-    enum Suit{}
+    public enum Suit{
+        CLUBS,DIAMONDS,HEARTS,SPADES;
+
+        private static final Random random = new Random();
+        private static final Suit[] suitList = Suit.values();
+
+        public static Enum getRandomSuit(){
+            return suitList[random.nextInt(suitList.length)];
+        }
+    }
 
     //Testing
     public static void main(String[] args){
-        System.out.println(Rank.SEVEN.getNext());
-        System.out.println(Rank.THREE.getValue());
+        //System.out.println(Rank.SEVEN.getNext());
+        //System.out.println(Rank.THREE.getValue());
+        System.out.println(Suit.getRandomSuit());
 
     }
 }
