@@ -1,10 +1,12 @@
 package com.company;
-import java.io.*;
-import java.util.EnumSet;
+import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Random;
 
 
-public class Card implements Serializable{
+public class Card implements Serializable, Comparable<Card>{
+
+
 
     public enum Rank{
 
@@ -58,11 +60,11 @@ public class Card implements Serializable{
     }
 
     public Rank getRank() {
-        return rank;
+        return this.rank;
     }
 
     public Suit getSuit() {
-        return suit;
+        return this.suit;
     }
 
     public void setRank(Rank rank) {
@@ -76,6 +78,11 @@ public class Card implements Serializable{
     @Override
     public String toString() {
         return "Card{" + "rank=" + rank + ", suit=" + suit + '}';
+    }
+
+    @Override
+    public int compareTo(Card card) {
+        return 0;
     }
 
     //Testing
