@@ -6,9 +6,7 @@ import java.util.Random;
 
 public class Card implements Serializable{
 
-    private static final long serialVersionUID = 100L;
-
-    enum Rank{
+    public enum Rank{
 
         TWO(2), THREE(3),FOUR(4),FIVE(5),SIX(6),SEVEN(7),EIGHT(8),
         NINE(9),TEN(10), JACK(10), QUEEN(10), KING(10), ACE(11);
@@ -48,6 +46,36 @@ public class Card implements Serializable{
         public static Enum getRandomSuit(){
             return suitList[random.nextInt(suitList.length)];
         }
+    }
+
+    private static final long serialVersionUID = 100L;
+    Rank rank;
+    Suit suit;
+
+    public Card(Rank rank, Suit suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" + "rank=" + rank + ", suit=" + suit + '}';
     }
 
     //Testing
