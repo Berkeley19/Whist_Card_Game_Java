@@ -23,20 +23,27 @@ public class Card implements Serializable{
             return rankValue;
         }
 
-        public int getNext(){
+        public Enum getNext(){
             Rank[] rankList = Rank.values();
             if(this.ordinal() == rankList.length-1){
-                return Rank.TWO.getRankValue();
+                return Rank.TWO;
             }else{
-                return rankList[this.ordinal() + 1].getRankValue();
+                return rankList[this.ordinal() + 1];
             }
         }
+
+        public int getValue(){
+            return this.getRankValue();
+        }
+
 
     }
     enum Suit{}
 
+    //Testing
     public static void main(String[] args){
-        System.out.println(Rank.ACE.getNext());
+        System.out.println(Rank.SEVEN.getNext());
+        System.out.println(Rank.THREE.getValue());
 
     }
 }
