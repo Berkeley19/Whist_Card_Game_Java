@@ -1,17 +1,17 @@
 package com.company;
+
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Random;
 
 
-public class Card implements Serializable, Comparable<Card>{
+public class Card implements Serializable, Comparable<Card> {
 
 
+    public enum Rank {
 
-    public enum Rank{
-
-        TWO(2), THREE(3),FOUR(4),FIVE(5),SIX(6),SEVEN(7),EIGHT(8),
-        NINE(9),TEN(10), JACK(10), QUEEN(10), KING(10), ACE(11);
+        TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8),
+        NINE(9), TEN(10), JACK(10), QUEEN(10), KING(10), ACE(11);
 
         private int rankValue;
         private static final Rank[] rankList = Rank.values();
@@ -21,31 +21,32 @@ public class Card implements Serializable, Comparable<Card>{
             this.rankValue = value;
         }
 
-        public int getRankValue(){
-            return rankValue;
+        public int getRankValue() {
+            return this.rankValue;
         }
 
-        public Enum getNext(){
-            if(this.ordinal() == rankList.length-1){
+        public Enum getNext() {
+            if (this.ordinal() == rankList.length - 1) {
                 return Rank.TWO;
-            }else{
+            } else {
                 return rankList[this.ordinal() + 1];
             }
         }
 
-        public int getValue(){
+        public int getValue() {
             return this.getRankValue();
         }
 
 
     }
-    public enum Suit{
-        CLUBS,DIAMONDS,HEARTS,SPADES;
+
+    public enum Suit {
+        CLUBS, DIAMONDS, HEARTS, SPADES;
 
         private static final Random random = new Random();
         private static final Suit[] suitList = Suit.values();
 
-        public static Enum getRandomSuit(){
+        public static Enum getRandomSuit() {
             return suitList[random.nextInt(suitList.length)];
         }
     }
@@ -77,19 +78,34 @@ public class Card implements Serializable, Comparable<Card>{
 
     @Override
     public String toString() {
-        return "Card{" + "rank=" + rank + ", suit=" + suit + '}';
+        return "Card{" + "rank=" + this.rank + ", suit=" + this.suit + '}';
     }
 
     @Override
     public int compareTo(Card card) {
-        return 0;
+        if(card.getRank().getRankValue() > this.getRank().getRankValue()){
+            return 1;
+        }else if(card.getRank().getRankValue() == this.getRank().getRankValue()){
+            if(card.getSuit().ordinal() < this.getSuit().ordinal()){
+                return 1;
+            }else if(card.getSuit().ordinal() > this.getSuit().ordinal()){
+                return -1;
+            //never happen as no duplicate cards
+            }else{
+                return 0;
+            }
+        }else{
+            return -1;
+        }
     }
 
     //Testing
-    public static void main(String[] args){
+    public static void main(String[] args) {
         //System.out.println(Rank.SEVEN.getNext());
         //System.out.println(Rank.THREE.getValue());
-        System.out.println(Suit.getRandomSuit());
+        Card card = new Card(Rank.FOUR, Suit.DIAMONDS);
+        Card card1 = new Card(Rank.FOUR, Suit.CLUBS);
+        System.out.println(card.compareTo(card1));
 
     }
 }
