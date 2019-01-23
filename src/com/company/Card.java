@@ -99,6 +99,10 @@ public class Card implements Serializable, Comparable<Card> {
         }
     }
 
+    public static Card max(){
+
+    }
+
     //Testing
     public static void main(String[] args) {
         //System.out.println(Rank.SEVEN.getNext());
