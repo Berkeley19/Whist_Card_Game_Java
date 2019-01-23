@@ -114,7 +114,7 @@ public class Card implements Serializable, Comparable<Card> {
         return highestCardValue;
     }
 
-}
+
     //Testing
     public static void main(String[] args) {
         //System.out.println(Rank.SEVEN.getNext());
