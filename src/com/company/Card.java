@@ -1,7 +1,9 @@
 package com.company;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Random;
 
 
@@ -99,8 +101,14 @@ public class Card implements Serializable, Comparable<Card> {
         }
     }
 
-    public static Card max(){
+    public static Card max(ArrayList<Card> listOfCards){
+        Iterator<Card> itr = listOfCards.iterator();
+        Card highestCard = listOfCards.get(0);
 
+        while(itr.hasNext()){
+            Card card = itr.next();
+
+        }
     }
 
     //Testing
