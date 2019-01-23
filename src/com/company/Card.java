@@ -120,7 +120,12 @@ public class Card implements Serializable, Comparable<Card> {
         //System.out.println(Rank.THREE.getValue());
         Card card = new Card(Rank.FOUR, Suit.DIAMONDS);
         Card card1 = new Card(Rank.FOUR, Suit.CLUBS);
-        System.out.println(card.compareTo(card1));
-
+        Card card2 = new Card(Rank.FOUR, Suit.SPADES);
+        //System.out.println(card.compareTo(card1));
+        ArrayList<Card> cardList = new ArrayList<Card>();
+        cardList.add(card);
+        cardList.add(card1);
+        cardList.add(card2);
+        System.out.println(max(cardList));
     }
 }
