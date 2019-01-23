@@ -85,35 +85,36 @@ public class Card implements Serializable, Comparable<Card> {
 
     @Override
     public int compareTo(Card card) {
-        if(card.getRank().getRankValue() > this.getRank().getRankValue()){
+        if (card.getRank().getRankValue() > this.getRank().getRankValue()) {
             return 1;
-        }else if(card.getRank().getRankValue() == this.getRank().getRankValue()){
-            if(card.getSuit().ordinal() < this.getSuit().ordinal()){
+        } else if (card.getRank().getRankValue() == this.getRank().getRankValue()) {
+            if (card.getSuit().ordinal() < this.getSuit().ordinal()) {
                 return 1;
-            }else if(card.getSuit().ordinal() > this.getSuit().ordinal()){
+            } else if (card.getSuit().ordinal() > this.getSuit().ordinal()) {
                 return -1;
-            //never happen as no duplicate cards
-            }else{
+                //never happen as no duplicate cards
+            } else {
                 return 0;
             }
-        }else{
+        } else {
             return -1;
         }
     }
 
-    public static Card max(ArrayList<Card> listOfCards){
+    public static Card max(ArrayList<Card> listOfCards) {
         Iterator<Card> itr = listOfCards.iterator();
         Card highestCardValue = listOfCards.get(0);
 
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
             Card card = itr.next();
-            if(card.compareTo(highestCardValue) > 0){
+            if (card.compareTo(highestCardValue) > 0) {
                 highestCardValue = card;
             }
         }
         return highestCardValue;
     }
 
+}
     //Testing
     public static void main(String[] args) {
         //System.out.println(Rank.SEVEN.getNext());
