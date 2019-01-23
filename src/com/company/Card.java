@@ -103,12 +103,15 @@ public class Card implements Serializable, Comparable<Card> {
 
     public static Card max(ArrayList<Card> listOfCards){
         Iterator<Card> itr = listOfCards.iterator();
-        Card highestCard = listOfCards.get(0);
+        Card highestCardValue = listOfCards.get(0);
 
         while(itr.hasNext()){
             Card card = itr.next();
-
+            if(card.compareTo(highestCardValue) > 0){
+                highestCardValue = card;
+            }
         }
+        return highestCardValue;
     }
 
     //Testing
