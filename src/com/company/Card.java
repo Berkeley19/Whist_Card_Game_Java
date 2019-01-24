@@ -114,9 +114,9 @@ public class Card implements Serializable, Comparable<Card> {
             if (card1.getRank().getRankValue() > card2.getRank().getRankValue()) {
                 return -1;
             } else if (card1.getRank().getRankValue() == card2.getRank().getRankValue()) {
-                if (card1.getSuit().ordinal() < card2.getSuit().ordinal()) {
+                if (card1.getSuit().ordinal() > card2.getSuit().ordinal()) {
                     return -1;
-                } else if (card1.getSuit().ordinal() > card2.getSuit().ordinal()) {
+                } else if (card1.getSuit().ordinal() < card2.getSuit().ordinal()) {
                     return 1;
                     //never happen as no duplicate cards
                 } else {
@@ -139,29 +139,41 @@ public class Card implements Serializable, Comparable<Card> {
             }
         };
     }
+    public static void selectTest(){
+        List<Card> cardList = new ArrayList<>();
+        cardList.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cardList.add(new Card(Rank.FOUR, Suit.CLUBS));
+        cardList.add(new Card(Rank.FOUR, Suit.SPADES));
+        cardList.add(new Card(Rank.TEN, Suit.DIAMONDS));
+        cardList.add(new Card(Rank.TEN, Suit.CLUBS));
+        cardList.add(new Card(Rank.TWO, Suit.SPADES));
+        cardList.sort(CompareDescending.cardComparator);
+        cardList.sort(CompareRank.cardComparator);
 
 
+
+
+
+    }
+    public static ArrayList<Card> chooseGreater(List<Card> cardList, Comparator cardComparator, Card card){
+        ArrayList<Card> cardArrayList = new ArrayList<>();
+
+
+        return cardArrayList;
+    }
 
     //Testing
     public static void main(String[] args) {
         System.out.println(Rank.SEVEN.getNext().getValue());
-        Card card = new Card(Rank.FOUR, Suit.DIAMONDS);
-        Card card1 = new Card(Rank.FOUR, Suit.CLUBS);
-        Card card2 = new Card(Rank.FOUR, Suit.SPADES);
-        Card card3 = new Card(Rank.TEN, Suit.DIAMONDS);
-        Card card4 = new Card(Rank.TEN, Suit.CLUBS);
-        Card card5 = new Card(Rank.TWO, Suit.SPADES);
-
         //System.out.println(card.compareTo(card1));
         List<Card> cardList = new ArrayList<>();
-        cardList.add(card);
-        cardList.add(card1);
-        cardList.add(card2);
-        cardList.add(card3);
-        cardList.add(card4);
-        cardList.add(card5);
-        //cardList.sort(CompareDescending.cardComparator);
-        cardList.sort(CompareRank.cardComparator);
-        System.out.println(cardList.toString());
+        /*cardList.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cardList.add(new Card(Rank.FOUR, Suit.CLUBS));
+        cardList.add(new Card(Rank.FOUR, Suit.SPADES));
+        cardList.add(new Card(Rank.TEN, Suit.DIAMONDS));
+        cardList.add(new Card(Rank.TEN, Suit.CLUBS));
+        cardList.add(new Card(Rank.TWO, Suit.SPADES));*/
+        System.out.println(cardList);
+
     }
 }
