@@ -1,13 +1,12 @@
 package com.company;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 
 public class Card implements Serializable, Comparable<Card> {
+
+
 
 
     public enum Rank {
@@ -27,12 +26,8 @@ public class Card implements Serializable, Comparable<Card> {
             return this.rankValue;
         }
 
-        public Enum getNext() {
-            if (this.ordinal() == rankList.length - 1) {
-                return Rank.TWO;
-            } else {
-                return rankList[this.ordinal() + 1];
-            }
+        public Rank getNext() {
+            return rankList[(ordinal()+1)%rankList.length];
         }
 
         public int getValue() {
@@ -48,14 +43,14 @@ public class Card implements Serializable, Comparable<Card> {
         private static final Random random = new Random();
         private static final Suit[] suitList = Suit.values();
 
-        public static Enum getRandomSuit() {
+        public static Suit getRandomSuit() {
             return suitList[random.nextInt(suitList.length)];
         }
     }
 
     private static final long serialVersionUID = 100L;
-    Rank rank;
-    Suit suit;
+    private Rank rank;
+    private Suit suit;
 
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
@@ -101,50 +96,72 @@ public class Card implements Serializable, Comparable<Card> {
         }
     }
 
-    public static Card max(ArrayList<Card> listOfCards) {
+    public static Card max(List<Card> listOfCards) {
         Iterator<Card> itr = listOfCards.iterator();
-        Card highestCardValue = listOfCards.get(0);
+        Card maxCard = listOfCards.get(0);
 
         while (itr.hasNext()) {
             Card card = itr.next();
-            if (card.compareTo(highestCardValue) > 0) {
-                highestCardValue = card;
+            if (card.compareTo(maxCard) > 0) {
+                maxCard = card;
             }
         }
-        return highestCardValue;
+        return maxCard;
     }
 
-    public class CompareDescending implements Comparator<Card> {
-
-
-        @Override
-        public int compare(Card card1, Card card2) {
-            return 0;
-        }
+    public static class CompareDescending {
+        public static Comparator<Card> cardComparator = (Card card1, Card card2) -> {
+            if (card1.getRank().getRankValue() > card2.getRank().getRankValue()) {
+                return -1;
+            } else if (card1.getRank().getRankValue() == card2.getRank().getRankValue()) {
+                if (card1.getSuit().ordinal() < card2.getSuit().ordinal()) {
+                    return -1;
+                } else if (card1.getSuit().ordinal() > card2.getSuit().ordinal()) {
+                    return 1;
+                    //never happen as no duplicate cards
+                } else {
+                    return 0;
+                }
+            } else {
+                return 1;
+            }
+        };
     }
 
-    public class CompareRank implements Comparator<Card>{
-
-        @Override
-        public int compare(Card card1, Card card2) {
-            return 0;
-        }
+    public static class CompareRank {
+        public static Comparator<Card> cardComparator = (Card card1, Card card2) -> {
+            if (card1.getRank().ordinal() > card2.getRank().ordinal()) {
+                return 1;
+            } else if (card1.getRank().ordinal() < card2.getRank().ordinal()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        };
     }
 
 
 
     //Testing
     public static void main(String[] args) {
-        //System.out.println(Rank.SEVEN.getNext());
-        //System.out.println(Rank.THREE.getValue());
+        System.out.println(Rank.SEVEN.getNext().getValue());
         Card card = new Card(Rank.FOUR, Suit.DIAMONDS);
         Card card1 = new Card(Rank.FOUR, Suit.CLUBS);
         Card card2 = new Card(Rank.FOUR, Suit.SPADES);
+        Card card3 = new Card(Rank.TEN, Suit.DIAMONDS);
+        Card card4 = new Card(Rank.TEN, Suit.CLUBS);
+        Card card5 = new Card(Rank.TWO, Suit.SPADES);
+
         //System.out.println(card.compareTo(card1));
-        ArrayList<Card> cardList = new ArrayList<Card>();
+        List<Card> cardList = new ArrayList<>();
         cardList.add(card);
         cardList.add(card1);
         cardList.add(card2);
-        System.out.println(max(cardList));
+        cardList.add(card3);
+        cardList.add(card4);
+        cardList.add(card5);
+        //cardList.sort(CompareDescending.cardComparator);
+        cardList.sort(CompareRank.cardComparator);
+        System.out.println(cardList.toString());
     }
 }
