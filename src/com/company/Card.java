@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -111,6 +112,23 @@ public class Card implements Serializable, Comparable<Card> {
             }
         }
         return highestCardValue;
+    }
+
+    public class CompareDescending implements Comparator<Card> {
+
+
+        @Override
+        public int compare(Card card1, Card card2) {
+            return 0;
+        }
+    }
+
+    public class CompareRank implements Comparator<Card>{
+
+        @Override
+        public int compare(Card card1, Card card2) {
+            return 0;
+        }
     }
 
 
