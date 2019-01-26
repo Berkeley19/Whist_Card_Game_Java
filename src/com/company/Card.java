@@ -148,11 +148,7 @@ public class Card implements Serializable, Comparable<Card> {
         cardList.add(new Card(Rank.TEN, Suit.CLUBS));
         cardList.add(new Card(Rank.TWO, Suit.SPADES));
         cardList.sort(CompareDescending.cardComparator);
-        cardList.sort(CompareRank.cardComparator);
-
-
-
-
+        
 
     }
     public static ArrayList<Card> chooseGreater(List<Card> cardList, Comparator cardComparator, Card card){
