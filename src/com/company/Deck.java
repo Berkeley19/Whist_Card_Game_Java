@@ -19,10 +19,23 @@ public class Deck {
         }
     }
 
+    public int size(){
+        return deckOfCards.size();
+    }
+
+    public void newDeck(){
+        deckOfCards = new ArrayList<>();
+        initialiseDeck();
+        Collections.shuffle(deckOfCards);
+    }
+
     public static void main(String[] args){
         Deck deck = new Deck();
         System.out.println(deck.deckOfCards.size());
+        deck.newDeck();
+        System.out.println(deck.size());
     }
+
 
 
 
