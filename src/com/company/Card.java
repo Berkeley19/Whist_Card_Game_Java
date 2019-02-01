@@ -50,8 +50,6 @@ public class Card implements Serializable, Comparable<Card> {
         }
     }
 
-
-
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
         this.suit = suit;
@@ -64,7 +62,6 @@ public class Card implements Serializable, Comparable<Card> {
     public Suit getSuit() {
         return this.suit;
     }
-
 
     @Override
     public String toString() {
@@ -129,6 +126,7 @@ public class Card implements Serializable, Comparable<Card> {
             }
         };
     }
+
     public static int compareGreaterCard(Card card1, Card card2){
         //System.out.println(card1 + " " + card2 + "ascending");
         if (card1.getRank().getRankValue() > card2.getRank().getRankValue()) {
@@ -138,8 +136,8 @@ public class Card implements Serializable, Comparable<Card> {
         } else {
             return -1;
         }
-
     }
+
     public static void selectTest(){
         List<Card> cardList = new ArrayList<>();
         cardList.add(new Card(Rank.FOUR, Suit.DIAMONDS));

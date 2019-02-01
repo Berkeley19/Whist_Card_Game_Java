@@ -31,17 +31,26 @@ public class Deck implements Iterable<Card>{
         Collections.shuffle(deckOfCards);
     }
 
-
+    public ArrayList<Card> getDeckOfCards(){
+        return deckOfCards;
+    }
     @Override
     public Iterator<Card> iterator() {
-        return new TraverseDeckIterator();
+        return new TraverseDeckIterator(this);
     }
 
     public static class TraverseDeckIterator implements Iterator<Card> {
+        private Deck deckOfCards;
+        private int currentIndex;
+
+        public TraverseDeckIterator(Deck deckOfCards){
+            this.deckOfCards = deckOfCards;
+            currentIndex = 0;
+        }
 
         @Override
         public boolean hasNext() {
-            return false;
+            return currentIndex < deckOfCards.size();
         }
 
         @Override
@@ -50,9 +59,14 @@ public class Deck implements Iterable<Card>{
         }
     }
 
+    @Override
+    public String toString() {
+        return "Deck " + deckOfCards;
+    }
+
     public static void main(String[] args){
         Deck deck = new Deck();
-        System.out.println(deck.deckOfCards.size());
+        System.out.println(deck.getDeckOfCards().size());
         deck.newDeck();
         System.out.println(deck.size());
     }
