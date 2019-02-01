@@ -1,16 +1,15 @@
 package com.company;
 
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Stream;
 
 
 public class Card implements Serializable, Comparable<Card> {
 
-
-
+    private static final long serialVersionUID = 100L;
+    private Rank rank;
+    private Suit suit;
 
     public enum Rank {
 
@@ -38,7 +37,6 @@ public class Card implements Serializable, Comparable<Card> {
             return this.getRankValue();
         }
 
-
     }
 
     public enum Suit {
@@ -52,9 +50,7 @@ public class Card implements Serializable, Comparable<Card> {
         }
     }
 
-    private static final long serialVersionUID = 100L;
-    private Rank rank;
-    private Suit suit;
+
 
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
