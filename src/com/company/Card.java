@@ -82,11 +82,8 @@ public class Card implements Serializable, Comparable<Card> {
 
     }
 
-    public static boolean isRankEqual(Card card1, Card card2){
-        if(card1.getRank().ordinal()==(card2).getRank().ordinal()){
-            return true;
-        }
-        return false;
+    private static boolean isRankEqual(Card card1, Card card2){
+        return card1.getRank().ordinal() == (card2).getRank().ordinal();
     }
 
     public static Card max(List<Card> listOfCards) {
@@ -163,7 +160,7 @@ public class Card implements Serializable, Comparable<Card> {
         System.out.println(chooseGreater(cardList, cardComparatorGreater, card));
     }
 
-    public static ArrayList<Card> chooseGreater(List<Card> cardList, Comparator<Card> cardComparator, Card card){
+    private static ArrayList<Card> chooseGreater(List<Card> cardList, Comparator<Card> cardComparator, Card card){
         ArrayList<Card> cardArrayList = new ArrayList<>();
         for (Card cardElement: cardList) {
             if(cardComparator.equals(CompareDescending.compareDescending)){
