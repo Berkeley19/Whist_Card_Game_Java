@@ -72,6 +72,12 @@ public class Deck implements Iterable<Card>{
 
     }
 
+    public Card deal(){
+        TraverseDeckIterator itr = new TraverseDeckIterator(this);
+
+    }
+
+
     @Override
     public String toString() {
         return "Deck " + deckOfCards;
