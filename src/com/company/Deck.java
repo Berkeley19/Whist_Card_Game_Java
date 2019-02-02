@@ -1,5 +1,6 @@
 package com.company;
 
+import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -58,10 +59,15 @@ public class Deck implements Iterable<Card>{
 
         @Override
         public Card next() {
-            if(currentPosition >= deckOfCards.getDeckOfCards().size()){
+            if(currentPosition == deckOfCards.getDeckOfCards().size()){
                 throw new NoSuchElementException( "Reached end of deck" );
             }
             return deckOfCards.getDeckOfCards().get(currentPosition++);
+        }
+
+        @Override
+        public void remove() {
+            deckOfCards.getDeckOfCards().remove(currentPosition);
         }
 
     }
