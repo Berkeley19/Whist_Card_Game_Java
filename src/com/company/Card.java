@@ -139,19 +139,19 @@ public class Card implements Serializable, Comparable<Card> {
     }
 
     public static void selectTest(){
-        List<Card> cardList = new ArrayList<>();
-        cardList.add(new Card(Rank.FOUR, Suit.DIAMONDS));
-        cardList.add(new Card(Rank.FOUR, Suit.CLUBS));
-        cardList.add(new Card(Rank.FOUR, Suit.SPADES));
-        cardList.add(new Card(Rank.TEN, Suit.DIAMONDS));
-        cardList.add(new Card(Rank.TEN, Suit.CLUBS));
-        cardList.add(new Card(Rank.TWO, Suit.SPADES));
-        cardList.add(new Card(Rank.SEVEN, Suit.SPADES));
-        Card card =  new Card(Rank.FOUR, Suit.HEARTS);
-        Comparator<Card> cardComparatorGreater = (Card c1, Card c2) -> compareGreaterCard(c1, c2);
-        System.out.println(chooseGreater(cardList, CompareDescending.compareDescending, card));
-        System.out.println(chooseGreater(cardList, CompareRank.rankComparator, card));
-        System.out.println(chooseGreater(cardList, cardComparatorGreater, card));
+            List<Card> cardList = new ArrayList<>();
+            cardList.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+            cardList.add(new Card(Rank.FOUR, Suit.CLUBS));
+            cardList.add(new Card(Rank.FOUR, Suit.SPADES));
+            cardList.add(new Card(Rank.TEN, Suit.DIAMONDS));
+            cardList.add(new Card(Rank.TEN, Suit.CLUBS));
+            cardList.add(new Card(Rank.TWO, Suit.SPADES));
+            cardList.add(new Card(Rank.SEVEN, Suit.SPADES));
+            Card card =  new Card(Rank.FOUR, Suit.HEARTS);
+            Comparator<Card> cardComparatorGreater = (Card c1, Card c2) -> compareGreaterCard(c1, c2);
+            System.out.println(chooseGreater(cardList, CompareDescending.compareDescending, card));
+            System.out.println(chooseGreater(cardList, CompareRank.rankComparator, card));
+            System.out.println(chooseGreater(cardList, cardComparatorGreater, card));
     }
 
     private static ArrayList<Card> chooseGreater(List<Card> cardList, Comparator<Card> cardComparator, Card card){

@@ -3,6 +3,7 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Deck implements Iterable<Card>{
     private ArrayList<Card> deckOfCards;
@@ -34,29 +35,35 @@ public class Deck implements Iterable<Card>{
     public ArrayList<Card> getDeckOfCards(){
         return deckOfCards;
     }
+
     @Override
     public Iterator<Card> iterator() {
+
         return new TraverseDeckIterator(this);
     }
 
     public static class TraverseDeckIterator implements Iterator<Card> {
         private Deck deckOfCards;
-        private int currentIndex;
+        private int currentPosition;
 
         public TraverseDeckIterator(Deck deckOfCards){
             this.deckOfCards = deckOfCards;
-            currentIndex = 0;
+            currentPosition = 0;
         }
 
         @Override
         public boolean hasNext() {
-            return currentIndex < deckOfCards.size();
+            return currentPosition < deckOfCards.getDeckOfCards().size();
         }
 
         @Override
         public Card next() {
-            return null;
+            if(currentPosition >= deckOfCards.getDeckOfCards().size()){
+                throw new NoSuchElementException( "Reached end of deck" );
+            }
+            return deckOfCards.getDeckOfCards().get(currentPosition++);
         }
+
     }
 
     @Override
