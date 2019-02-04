@@ -39,7 +39,6 @@ public class Deck implements Iterable<Card>{
 
     @Override
     public Iterator<Card> iterator() {
-
         return new TraverseDeckIterator(this);
     }
 
@@ -54,13 +53,14 @@ public class Deck implements Iterable<Card>{
 
         @Override
         public boolean hasNext() {
-            return currentPosition < deckOfCards.getDeckOfCards().size();
+            return currentPosition < deckOfCards.getDeckOfCards().size()
+                && deckOfCards.getDeckOfCards().get(currentPosition) != null;
         }
 
         @Override
         public Card next() {
-            if(currentPosition == deckOfCards.getDeckOfCards().size()){
-                throw new NoSuchElementException( "Reached end of deck" );
+            if(currentPosition >= deckOfCards.getDeckOfCards().size()){
+                throw new NoSuchElementException( "Deck doesn't have anymore cards" );
             }
             return deckOfCards.getDeckOfCards().get(currentPosition++);
         }
@@ -69,14 +69,51 @@ public class Deck implements Iterable<Card>{
         public void remove() {
             deckOfCards.getDeckOfCards().remove(currentPosition);
         }
-
     }
 
     public Card deal(){
         TraverseDeckIterator itr = new TraverseDeckIterator(this);
-
+        if(!itr.hasNext()){
+            throw new NoSuchElementException("Deck is empty, create new one");
+        }
+        Card topCard = itr.next();
+        deckOfCards.remove(topCard);
+        return topCard;
     }
 
+    public static class SpadeIterator implements Iterator<Card> {
+        private Deck deckOfCards;
+        private int currentPosition;
+
+        public SpadeIterator(Deck deckOfCards){
+            for(Card card: deckOfCards){
+                if(!card.getSuit().equals(Card.Suit.SPADES)){
+                    deckOfCards.getDeckOfCards().remove(card);
+                }
+            }
+            this.deckOfCards = deckOfCards;
+            currentPosition = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentPosition < deckOfCards.getDeckOfCards().size()
+                    && deckOfCards.getDeckOfCards().get(currentPosition) != null;
+        }
+
+        @Override
+        public Card next() {
+            if(currentPosition >= deckOfCards.getDeckOfCards().size()){
+                throw new NoSuchElementException( "Deck doesn't have anymore cards" );
+            }
+            return deckOfCards.getDeckOfCards().get(currentPosition++);
+        }
+
+        @Override
+        public void remove() {
+            deckOfCards.getDeckOfCards().remove(currentPosition);
+        }
+    }
 
     @Override
     public String toString() {
@@ -85,8 +122,8 @@ public class Deck implements Iterable<Card>{
 
     public static void main(String[] args){
         Deck deck = new Deck();
-        System.out.println(deck.getDeckOfCards().size());
+        System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
         deck.newDeck();
-        System.out.println(deck.size());
+        System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
     }
 }

@@ -20,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Card.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="153" column="85" lean-forward="true" selection-start-line="153" selection-start-column="85" selection-end-line="153" selection-end-column="85" />
+            <state relative-caret-position="2296">
+              <caret line="187" column="37" selection-start-line="187" selection-start-column="37" selection-end-line="187" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,18 +32,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Deck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="60" column="28" lean-forward="true" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
+            <state relative-caret-position="405">
+              <caret line="117" column="13" lean-forward="true" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#808#809#0" expanded="true" />
-                <element signature="e#842#843#0" expanded="true" />
-                <element signature="e#1284#1285#0" expanded="true" />
-                <element signature="e#1348#1349#0" expanded="true" />
+                <element signature="e#976#977#0" expanded="true" />
+                <element signature="e#1029#1030#0" expanded="true" />
                 <element signature="e#1797#1798#0" expanded="true" />
-                <element signature="e#1852#1853#0" expanded="true" />
-                <element signature="e#1483#1484#0" expanded="true" />
-                <element signature="e#1527#1528#0" expanded="true" />
+                <element signature="e#1874#1875#0" expanded="true" />
+                <element signature="e#3398#3399#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -81,10 +78,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-7" />
+    <option name="width" value="1288" />
+    <option name="height" value="687" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -92,6 +88,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -115,13 +112,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549062086565" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549311376623" />
     <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
@@ -141,7 +137,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Deck">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Deck" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Deck" />
       <module name="Whist_Card_Game_Java" />
@@ -167,8 +163,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Deck" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Deck" />
       </list>
     </recent_temporary>
   </component>
@@ -195,18 +191,19 @@
       <workItem from="1548849756345" duration="243000" />
       <workItem from="1548933344461" duration="17340000" />
       <workItem from="1549031415672" duration="11013000" />
-      <workItem from="1549119626259" duration="5399000" />
+      <workItem from="1549119626259" duration="5997000" />
+      <workItem from="1549231449615" duration="6446000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75147000" />
+    <option name="totallyTimeSpent" value="82191000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.5847548" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.084754795" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -215,7 +212,7 @@
       <window_info id="Favorites" order="6" side_tool="true" weight="0.32955465" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8632385" weight="0.18743229" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.8632385" visible="true" weight="0.21451788" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -225,7 +222,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010941" side_tool="true" weight="0.32932165" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4989059" weight="0.2340195" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49878544" weight="0.32827735" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49878544" weight="0.3268206" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -276,8 +273,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Card.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="153" column="85" lean-forward="true" selection-start-line="153" selection-start-column="85" selection-end-line="153" selection-end-column="85" />
+        <state relative-caret-position="2296">
+          <caret line="187" column="37" selection-start-line="187" selection-start-column="37" selection-end-line="187" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -286,18 +283,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Deck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="60" column="28" lean-forward="true" selection-start-line="60" selection-start-column="28" selection-end-line="60" selection-end-column="28" />
+        <state relative-caret-position="405">
+          <caret line="117" column="13" lean-forward="true" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#842#843#0" expanded="true" />
-            <element signature="e#1284#1285#0" expanded="true" />
-            <element signature="e#1348#1349#0" expanded="true" />
+            <element signature="e#976#977#0" expanded="true" />
+            <element signature="e#1029#1030#0" expanded="true" />
             <element signature="e#1797#1798#0" expanded="true" />
-            <element signature="e#1852#1853#0" expanded="true" />
-            <element signature="e#1483#1484#0" expanded="true" />
-            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1874#1875#0" expanded="true" />
+            <element signature="e#3398#3399#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -184,9 +184,11 @@ public class Card implements Serializable, Comparable<Card> {
         cardList.add(new Card(Rank.KING, Suit.DIAMONDS));
         cardList.add(new Card(Rank.ACE, Suit.CLUBS));
         System.out.println(cardList.get(0).compareTo(cardList.get(1)));
-        cardList.sort(CompareDescending.compareDescending);
+        //cardList.sort(CompareDescending.compareDescending);
         System.out.println(cardList);
-        selectTest();
-        System.out.println(max(cardList));
+
+        //selectTest();
+        //System.out.println(max(cardList));
+
     }
 }
