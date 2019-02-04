@@ -1,13 +1,15 @@
 package com.company;
 
+import java.io.Serializable;
 import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Deck implements Iterable<Card>{
+public class Deck implements Iterable<Card>, Serializable {
     private ArrayList<Card> deckOfCards;
+    private static final long serialVersionUID = 49;
 
     public Deck(){
         deckOfCards = new ArrayList<>();
@@ -46,7 +48,7 @@ public class Deck implements Iterable<Card>{
         private Deck deckOfCards;
         private int currentPosition;
 
-        public TraverseDeckIterator(Deck deckOfCards){
+        TraverseDeckIterator(Deck deckOfCards){
             this.deckOfCards = deckOfCards;
             currentPosition = 0;
         }
@@ -119,7 +121,7 @@ public class Deck implements Iterable<Card>{
 
     @Override
     public String toString() {
-        return "Deck " + deckOfCards;
+        return "Deck of card->" + deckOfCards;
     }
 
     public static void main(String[] args){
@@ -127,13 +129,10 @@ public class Deck implements Iterable<Card>{
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
         deck.newDeck();
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
-        /*for(int i=0; i<10; i++){
+        for(int i=0; i<10; i++){
+            System.out.println(deck.deal() + " card dealt");
             System.out.println(deck.getDeckOfCards().size());
-            System.out.println(deck.size());
-            System.out.println(deck.deal());
-            System.out.println(deck.getDeckOfCards().size());
-            System.out.println(deck.size());
-        }*/
+        }
         /*int y=0;
         TraverseDeckIterator itr = new TraverseDeckIterator(deck);
         while(itr.hasNext()){
@@ -143,10 +142,11 @@ public class Deck implements Iterable<Card>{
         }
         System.out.println(y);
         */
-        SpadeIterator itr2 = new SpadeIterator(deck);
+        /*SpadeIterator itr2 = new SpadeIterator(deck);
+        System.out.println(itr2.deckOfCards.getDeckOfCards());
         while(itr2.hasNext()){
             Card nextCard = itr2.next();
             System.out.println(nextCard + "just spades");
-        }
+        }*/
     }
 }
