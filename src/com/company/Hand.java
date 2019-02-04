@@ -1,11 +1,12 @@
 package com.company;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hand {
+public class Hand implements Serializable {
     private static final long serialVersionUID = 300L;
 
-    ArrayList<Card> handOfCards;
+    private ArrayList<Card> handOfCards;
     private int currentDiamondCount;
     private int currentSpadeCount;
     private int currentClubCount;
@@ -26,9 +27,13 @@ public class Hand {
         this.handOfCards = new ArrayList<>();
 
     }
-
-    public void addSingleCard(){
-
+    public void additionCardMethod(Card card){
+        handOfCards.add(card);
+        currentHandCount += card.getRank().getRankValue();
+    }
+    public void addSingleCard(Card card){
+        increaseSuitCount(card);
+        additionCardMethod(card);
     }
 
     public void addCardColletion(){
@@ -39,5 +44,30 @@ public class Hand {
 
     }
 
+    public void increaseSuitCount(Card card){
+        Card.Suit suit = card.getSuit();
+        switch(suit){
+            case CLUBS: currentClubCount++;
+                break;
+            case DIAMONDS: currentDiamondCount++;
+                break;
+            case SPADES: currentSpadeCount++;
+                break;
+            case HEARTS: currentHeartCount++;
+                break;
+        }
+    }
+
+    public boolean removeSingleCard(){
+
+    }
+
+    public boolean removeAnotherHand(){
+
+    }
+
+    public Card removeSpecificPosition(int index){
+
+    }
 
 }

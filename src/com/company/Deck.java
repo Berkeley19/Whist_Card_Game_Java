@@ -1,15 +1,15 @@
 package com.company;
 
 import java.io.Serializable;
-import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Deck implements Iterable<Card>, Serializable {
+    private static final long serialVersionUID = 49L;
+
     private ArrayList<Card> deckOfCards;
-    private static final long serialVersionUID = 49;
 
     public Deck(){
         deckOfCards = new ArrayList<>();
