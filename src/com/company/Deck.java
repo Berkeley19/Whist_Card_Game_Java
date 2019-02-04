@@ -129,10 +129,12 @@ public class Deck implements Iterable<Card>, Serializable {
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
         deck.newDeck();
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
+        //deal hand removes 10 cards from deck of cards to finish with 42 cards
         for(int i=0; i<10; i++){
             System.out.println(deck.deal() + " card dealt");
             System.out.println(deck.getDeckOfCards().size());
         }
+
         /*int y=0;
         TraverseDeckIterator itr = new TraverseDeckIterator(deck);
         while(itr.hasNext()){
@@ -148,5 +150,13 @@ public class Deck implements Iterable<Card>, Serializable {
             Card nextCard = itr2.next();
             System.out.println(nextCard + "just spades");
         }*/
+        Iterator<Card> itr3 = deck.iterator();
+        int check = 0;
+        while(itr3.hasNext()){
+            Card nextCard = itr3.next();
+            System.out.println(nextCard + "default iterator");
+            check++;
+        }
+        System.out.println(check);
     }
 }
