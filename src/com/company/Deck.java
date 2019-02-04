@@ -86,12 +86,14 @@ public class Deck implements Iterable<Card>{
         private int currentPosition;
 
         public SpadeIterator(Deck deckOfCards){
+            Deck spadeDeck = new Deck();
+            spadeDeck.getDeckOfCards().clear();
             for(Card card: deckOfCards){
-                if(!card.getSuit().equals(Card.Suit.SPADES)){
-                    deckOfCards.getDeckOfCards().remove(card);
+                if(card.getSuit().equals(Card.Suit.SPADES)){
+                    spadeDeck.getDeckOfCards().add(card);
                 }
             }
-            this.deckOfCards = deckOfCards;
+            this.deckOfCards = spadeDeck;
             currentPosition = 0;
         }
 
@@ -125,5 +127,26 @@ public class Deck implements Iterable<Card>{
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
         deck.newDeck();
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
+        /*for(int i=0; i<10; i++){
+            System.out.println(deck.getDeckOfCards().size());
+            System.out.println(deck.size());
+            System.out.println(deck.deal());
+            System.out.println(deck.getDeckOfCards().size());
+            System.out.println(deck.size());
+        }*/
+        /*int y=0;
+        TraverseDeckIterator itr = new TraverseDeckIterator(deck);
+        while(itr.hasNext()){
+            Card nextCard = itr.next();
+            y++;
+            System.out.println(nextCard + "all of dem");
+        }
+        System.out.println(y);
+        */
+        SpadeIterator itr2 = new SpadeIterator(deck);
+        while(itr2.hasNext()){
+            Card nextCard = itr2.next();
+            System.out.println(nextCard + "just spades");
+        }
     }
 }
