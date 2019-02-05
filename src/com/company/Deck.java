@@ -124,7 +124,7 @@ public class Deck implements Iterable<Card>, Serializable {
         return "Deck of card->" + deckOfCards;
     }
 
-    public static <deck1> void main(String[] args){
+    public static void main(String[] args){
         Deck deck = new Deck();
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
         deck.newDeck();

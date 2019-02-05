@@ -21,6 +21,7 @@ public class Hand implements Serializable, Iterable<Card> {
         handOfCards = new ArrayList<>();
     }
 
+
     public Hand(ArrayList<Card> arrayOfCards){
         handOfCards = new ArrayList<>();
         //add arrayOfCards to hand
@@ -31,13 +32,26 @@ public class Hand implements Serializable, Iterable<Card> {
 
     }
 
-    public void addToCurrentHandCount(Card card){
+    public void addToCurrentHandCount(){
+        int tempHandCount = 0;
+        int aceCount = 0;
+        for (Card c: handOfCards) {
+            if(c.getRank()!=Card.Rank.ACE){
+                tempHandCount += c.getRank().getRankValue();
+            }else{
+                aceCount++;
+            }
+        }
+        for(int i=0; i<aceCount; i++){
+            currentHandCount.add(tempHandCount + (aceCount*1) + (i*11));
+        }
 
     }
 
     private void cardAdditionMethod(Card card){
         handOfCards.add(card);
         increaseSuitCount(card.getSuit());
+        addToCurrentHandCount();
 
     }
 
