@@ -225,11 +225,33 @@ public class Hand implements Serializable, Iterable<Card> {
         return false;
     }
 
-    
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("Hand ||");
+        for (Card card: handOfCards) {
+            string.append(card.toString()).append(" ");
+        }
+        string.append("||");
+        return string.toString();
+    }
 
     public static void main(String[] args){
         Hand hand = new Hand();
-
+        hand.addSingleCard(new Card(Card.Rank.SEVEN, Card.Suit.CLUBS));
+        hand.addSingleCard(new Card(Card.Rank.SEVEN, Card.Suit.CLUBS));
+        System.out.println(hand);
+        ArrayList<Card> cardList = new ArrayList<>();
+        cardList.add(new Card(Card.Rank.FOUR, Card.Suit.DIAMONDS));
+        cardList.add(new Card(Card.Rank.FOUR, Card.Suit.CLUBS));
+        cardList.add(new Card(Card.Rank.FOUR, Card.Suit.SPADES));
+        cardList.add(new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
+        cardList.add(new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+        System.out.println(cardList);
+        System.out.println(hand);
+        hand.addCardCollection(cardList);
+        System.out.println(hand);
+        
     }
 
 
