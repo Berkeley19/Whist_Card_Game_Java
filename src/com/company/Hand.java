@@ -104,8 +104,10 @@ public class Hand implements Serializable {
         return true;
     }
 
-    public Card removeSpecificPosition(int index){
-
+    public Card removeSpecificPosition(int cardIndex){
+        Card card = handOfCards.get(cardIndex);
+        cardSubtractionMethod(card);
+        return handOfCards.remove(cardIndex);
     }
 
     public void decreaseSuitCount(Card.Suit cardSuit){
