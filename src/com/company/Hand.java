@@ -193,7 +193,17 @@ public class Hand implements Serializable, Iterable<Card> {
         handOfCards.sort(Card.CompareRank.rankComparator);
     }
 
-    public int countSuit(){
-        return 0;
+    public int countSuit(Card.Suit suit){
+        switch (suit){
+            case HEARTS: return currentHeartCount;
+            case SPADES: return currentSpadeCount;
+            case DIAMONDS: return currentDiamondCount;
+            case CLUBS: return currentClubCount;
+            default: return 0;
+        }
     }
+
+    
+
+
 }
