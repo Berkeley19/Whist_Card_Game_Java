@@ -203,7 +203,19 @@ public class Hand implements Serializable, Iterable<Card> {
         }
     }
 
+    public int countRank(Card.Rank rankOfCard){
+        int countOfRank = 0;
+        for (Card card:handOfCards) {
+            if(rankOfCard == card.getRank()){
+                countOfRank++;
+            }
+        }
+        return countOfRank;
+    }
+
     
+
+
 
 
 }
