@@ -28,7 +28,7 @@ public class Hand implements Serializable {
         this.handOfCards = new ArrayList<>();
 
     }
-    
+
     public void cardAdditionMethod(Card card){
         handOfCards.add(card);
         currentHandCount += card.getRank().getRankValue();
@@ -71,8 +71,18 @@ public class Hand implements Serializable {
         }
     }
 
-    public boolean removeSingleCard(){
+    public void cardSubtractionMethod(Card card){
+        decreaseSuitCount(card.getSuit());
+        currentHandCount -= card.getRank().getRankValue();
+    }
 
+    public boolean removeSingleCard(Card card){
+        boolean containsCard = handOfCards.contains(card);
+        if(containsCard){
+            cardSubtractionMethod(card);
+            handOfCards.remove(card);
+        }
+        return containsCard;
     }
 
     public boolean removeAnotherHand(){
@@ -83,8 +93,17 @@ public class Hand implements Serializable {
 
     }
 
-    public void decreaseSuitCount(){
-
+    public void decreaseSuitCount(Card.Suit cardSuit){
+        switch(cardSuit){
+            case CLUBS: currentClubCount--;
+                break;
+            case DIAMONDS: currentDiamondCount--;
+                break;
+            case SPADES: currentSpadeCount--;
+                break;
+            case HEARTS: currentHeartCount--;
+                break;
+        }
     }
 
 }
