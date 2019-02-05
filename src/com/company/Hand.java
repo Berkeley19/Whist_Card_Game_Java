@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hand implements Serializable {
     private static final long serialVersionUID = 300L;
@@ -27,17 +28,20 @@ public class Hand implements Serializable {
         this.handOfCards = new ArrayList<>();
 
     }
-    public void additionCardMethod(Card card){
+    public void cardAdditionMethod(Card card){
         handOfCards.add(card);
         currentHandCount += card.getRank().getRankValue();
     }
     public void addSingleCard(Card card){
         increaseSuitCount(card);
-        additionCardMethod(card);
+        cardAdditionMethod(card);
     }
 
-    public void addCardColletion(){
-
+    public void addCardColletion(List<Card> listOfCards){
+        for (Card card: listOfCards) {
+            increaseSuitCount(card);
+            cardAdditionMethod(card);
+        }
     }
 
     public void addHand(){
