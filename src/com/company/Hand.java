@@ -1,10 +1,7 @@
 package com.company;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class Hand implements Serializable, Iterable<Card> {
     private static final long serialVersionUID = 300L;
@@ -24,14 +21,13 @@ public class Hand implements Serializable, Iterable<Card> {
 
     public Hand(ArrayList<Card> arrayOfCards){
         handOfCards = new ArrayList<>();
-        //add arrayOfCards to hand
+        addCardCollection(arrayOfCards);
     }
 
     public Hand(Hand handOfCards){
         this.handOfCards = new ArrayList<>();
-
+        addHand(handOfCards);
     }
-
 
     private void calculateCurrentHandCount(){
         int tempHandCount = 0;
@@ -44,7 +40,7 @@ public class Hand implements Serializable, Iterable<Card> {
             }
         }
         for(int i=0; i<aceCount; i++){
-            currentHandCount.add(tempHandCount + (aceCount) + (i*11));
+            currentHandCount.add(tempHandCount + (aceCount-i) + (i*11));
         }
     }
 
@@ -105,40 +101,46 @@ public class Hand implements Serializable, Iterable<Card> {
     }
 
     private void cardSubtractionMethod(Card card){
+        System.out.println(this.handOfCards);
         this.handOfCards.remove(card);
+        System.out.println(this.handOfCards);
         decreaseSuitCount(card.getSuit());
         calculateCurrentHandCount();
     }
 
     public boolean removeSingleCard(Card card){
-        boolean containsCard = handOfCards.contains(card);
-        if(containsCard){
-            cardSubtractionMethod(card);
-        }
-        return containsCard;
+        cardSubtractionMethod(card);
+        return true;
     }
 
     public boolean removeAnotherHand(Hand handOfCards){
-        boolean containsHand = false;
-        for (Card card: handOfCards.getHandOfCards()) {
-            if(this.handOfCards.contains(card)){
-                containsHand = true;
-            }else{
-                return false;
+        //contains and remove wasn't working
+        //so had to get the indexes instead of the Card objects themselves
+        ArrayList<Integer> indexArray = new ArrayList<>();
+        for (int i=0; i<this.handOfCards.size(); i++) {
+            for (Card card: handOfCards.getHandOfCards()) {
+                if(this.handOfCards.get(i).toString().equals(card.toString())){
+                    indexArray.add(i);
+                }
             }
         }
-        if(containsHand){
-            for (Card card:handOfCards.getHandOfCards()) {
-                cardSubtractionMethod(card);
-            }
+        if(!(handOfCards.getHandOfCards().size()==indexArray.size())){
+            return false;
+        }
+        Comparator<Integer> cmp = Collections.reverseOrder();
+        indexArray.sort(cmp);
+        for (int index: indexArray) {
+            this.handOfCards.remove(this.handOfCards.get(index));
         }
         return true;
+
     }
 
     public Card removeSpecificPosition(int cardIndex){
         Card card = handOfCards.get(cardIndex);
+        System.out.println(card);
         cardSubtractionMethod(card);
-        return handOfCards.remove(cardIndex);
+        return card;
     }
 
     public void decreaseSuitCount(Card.Suit cardSuit){
@@ -228,30 +230,64 @@ public class Hand implements Serializable, Iterable<Card> {
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
-        string.append("Hand ||");
+        string.append("Hand||");
         for (Card card: handOfCards) {
-            string.append(card.toString()).append(" ");
+            string.append(card.toString()).append(" - ");
         }
-        string.append("||");
+        string.append("END OF HAND||");
         return string.toString();
     }
 
     public static void main(String[] args){
         Hand hand = new Hand();
         hand.addSingleCard(new Card(Card.Rank.SEVEN, Card.Suit.CLUBS));
-        hand.addSingleCard(new Card(Card.Rank.SEVEN, Card.Suit.CLUBS));
         System.out.println(hand);
         ArrayList<Card> cardList = new ArrayList<>();
+        Card card1 = new Card(Card.Rank.FOUR, Card.Suit.DIAMONDS);
         cardList.add(new Card(Card.Rank.FOUR, Card.Suit.DIAMONDS));
         cardList.add(new Card(Card.Rank.FOUR, Card.Suit.CLUBS));
         cardList.add(new Card(Card.Rank.FOUR, Card.Suit.SPADES));
         cardList.add(new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
         cardList.add(new Card(Card.Rank.TEN, Card.Suit.CLUBS));
         System.out.println(cardList);
+        Hand hand1 = new Hand(cardList);
+        System.out.println(hand1 + "  -same as cardList-  " + cardList.toString());
         System.out.println(hand);
+        Hand hand2= new Hand(hand);
+        System.out.println(hand2 + "  -same as hand-  " + hand.toString());
         hand.addCardCollection(cardList);
         System.out.println(hand);
-        
+        System.out.println(hand.countRank(Card.Rank.ACE ) + " should = 0");
+        System.out.println(hand.countRank(Card.Rank.FOUR ) + " should = 3");
+        hand.sort();
+        System.out.println(hand);
+        hand.sortByRank();
+        System.out.println(hand);
+        System.out.println(hand.hasSuit(Card.Suit.HEARTS) + " should = false");
+        System.out.println(hand.hasSuit(Card.Suit.CLUBS) + " should = true");
+        System.out.println(hand.countSuit(Card.Suit.CLUBS) +  " should = 3");
+        System.out.println(hand);
+        System.out.println(hand.removeSpecificPosition(3) + " Seven of Clubs removed");
+        System.out.println(hand + " Four of diamonds should be here");
+        System.out.println(hand.removeSingleCard(hand.getHandOfCards().get(3)));
+        System.out.println(hand + " Four of diamond should be gone");
+        Hand anotherHand = new Hand();
+        anotherHand.addSingleCard(new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
+        anotherHand.addSingleCard(new Card(Card.Rank.TEN, Card.Suit.CLUBS));
+        System.out.println(hand);
+        System.out.println(hand.removeAnotherHand(anotherHand) + " should = true");
+        System.out.println(hand);
+        TraverseHandIterator itr = new TraverseHandIterator(hand);
+        int index = 0;
+        while(itr.hasNext()){
+            System.out.println(itr.next() + "- hand - " + index);
+            index++;
+        }
+        System.out.println(hand.removeSpecificPosition(0));
+        System.out.println(hand);
+
+
+
     }
 
 
