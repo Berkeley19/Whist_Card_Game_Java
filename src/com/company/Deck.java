@@ -1,6 +1,6 @@
 package com.company;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -124,7 +124,7 @@ public class Deck implements Iterable<Card>, Serializable {
         return "Deck of card->" + deckOfCards;
     }
 
-    public static void main(String[] args){
+    public static <deck1> void main(String[] args){
         Deck deck = new Deck();
         System.out.println(deck.getDeckOfCards() + " " + deck.getDeckOfCards().size());
         deck.newDeck();
@@ -134,7 +134,6 @@ public class Deck implements Iterable<Card>, Serializable {
             System.out.println(deck.deal() + " card dealt");
             System.out.println(deck.getDeckOfCards().size());
         }
-
         /*int y=0;
         TraverseDeckIterator itr = new TraverseDeckIterator(deck);
         while(itr.hasNext()){
@@ -144,19 +143,37 @@ public class Deck implements Iterable<Card>, Serializable {
         }
         System.out.println(y);
         */
-        /*SpadeIterator itr2 = new SpadeIterator(deck);
+        String filename = "spadeDeck.ser";
+        Deck deck1 = new Deck();
+        SpadeIterator itr2 = new SpadeIterator(deck1);
+        deck1.getDeckOfCards().clear();
         System.out.println(itr2.deckOfCards.getDeckOfCards());
         while(itr2.hasNext()){
             Card nextCard = itr2.next();
+            deck1.getDeckOfCards().add(nextCard);
             System.out.println(nextCard + "just spades");
-        }*/
-        Iterator<Card> itr3 = deck.iterator();
+        }
+        System.out.println("Spade deck-" + deck1);
+        try{
+            FileOutputStream fos = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(fos);
+            out.writeObject(deck1);
+            out.close();
+            FileInputStream fis = new FileInputStream(filename);
+            ObjectInputStream in = new ObjectInputStream(fis);
+            Deck deck2 = (Deck)in.readObject();
+            System.out.println("Read in from file-" + deck2);
+            in.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        /*Iterator<Card> itr3 = deck.iterator();
         int check = 0;
         while(itr3.hasNext()){
             Card nextCard = itr3.next();
             System.out.println(nextCard + "default iterator");
             check++;
         }
-        System.out.println(check);
+        System.out.println(check);*/
     }
 }

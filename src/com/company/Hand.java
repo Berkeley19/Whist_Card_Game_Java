@@ -1,6 +1,5 @@
 package com.company;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,17 +31,13 @@ public class Hand implements Serializable, Iterable<Card> {
 
     }
 
+    public void addToCurrentHandCount(Card card){
+
+    }
+
     private void cardAdditionMethod(Card card){
         handOfCards.add(card);
         increaseSuitCount(card.getSuit());
-        if(card.getRank().equals(Card.Rank.ACE)){
-            currentHandCount.add(currentHandCount.get(currentHandCount.size()));
-        }else{
-            for (int handValue: currentHandCount) {
-                handValue += card.getRank().getRankValue();
-            }
-
-        }
 
     }
 
@@ -222,7 +217,10 @@ public class Hand implements Serializable, Iterable<Card> {
         return false;
     }
 
+    public static void main(String[] args){
+        Hand hand = new Hand();
 
+    }
 
 
 
