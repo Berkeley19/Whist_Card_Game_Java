@@ -32,7 +32,8 @@ public class Hand implements Serializable, Iterable<Card> {
 
     }
 
-    public void addToCurrentHandCount(){
+
+    private void calculateCurrentHandCount(){
         int tempHandCount = 0;
         int aceCount = 0;
         for (Card c: handOfCards) {
@@ -43,24 +44,21 @@ public class Hand implements Serializable, Iterable<Card> {
             }
         }
         for(int i=0; i<aceCount; i++){
-            currentHandCount.add(tempHandCount + (aceCount*1) + (i*11));
+            currentHandCount.add(tempHandCount + (aceCount) + (i*11));
         }
-
     }
 
     private void cardAdditionMethod(Card card){
-        handOfCards.add(card);
+        this.handOfCards.add(card);
         increaseSuitCount(card.getSuit());
-        addToCurrentHandCount();
-
+        calculateCurrentHandCount();
     }
 
     public void addSingleCard(Card card){
-        increaseSuitCount(card.getSuit());
         cardAdditionMethod(card);
     }
 
-    public void addCardColletion(List<Card> listOfCards){
+    public void addCardCollection(List<Card> listOfCards){
         for (Card card: listOfCards) {
             cardAdditionMethod(card);
         }
@@ -89,9 +87,7 @@ public class Hand implements Serializable, Iterable<Card> {
 
     public void addHand(Hand handOfCards){
         for (Card card: handOfCards.getHandOfCards()) {
-            increaseSuitCount(card.getSuit());
-            this.handOfCards.add(card);
-            //currentHandCount += card.getRank().getRankValue();
+            cardAdditionMethod(card);
         }
     }
 
@@ -109,9 +105,9 @@ public class Hand implements Serializable, Iterable<Card> {
     }
 
     private void cardSubtractionMethod(Card card){
-        handOfCards.remove(card);
+        this.handOfCards.remove(card);
         decreaseSuitCount(card.getSuit());
-        //currentHandCount -= card.getRank().getRankValue();
+        calculateCurrentHandCount();
     }
 
     public boolean removeSingleCard(Card card){
@@ -133,9 +129,7 @@ public class Hand implements Serializable, Iterable<Card> {
         }
         if(containsHand){
             for (Card card:handOfCards.getHandOfCards()) {
-                decreaseSuitCount(card.getSuit());
-                //currentHandCount -= card.getRank().getRankValue();
-                this.handOfCards.remove(card);
+                cardSubtractionMethod(card);
             }
         }
         return true;
@@ -230,6 +224,8 @@ public class Hand implements Serializable, Iterable<Card> {
         }
         return false;
     }
+
+    
 
     public static void main(String[] args){
         Hand hand = new Hand();
