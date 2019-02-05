@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Hand implements Serializable {
     private int currentSpadeCount;
     private int currentClubCount;
     private int currentHeartCount;
-    private int currentHandCount;
+    private ArrayList<Integer> currentHandCount;
 
 
     public Hand(){
@@ -29,9 +30,18 @@ public class Hand implements Serializable {
 
     }
 
-    public void cardAdditionMethod(Card card){
+    private void cardAdditionMethod(Card card){
         handOfCards.add(card);
-        currentHandCount += card.getRank().getRankValue();
+        increaseSuitCount(card.getSuit());
+        if(card.getRank().equals(Card.Rank.ACE)){
+            currentHandCount.add(currentHandCount.get(currentHandCount.size()));
+        }else{
+            for (int handValue: currentHandCount) {
+                handValue += card.getRank().getRankValue();
+            }
+
+        }
+
     }
 
     public void addSingleCard(Card card){
@@ -41,7 +51,6 @@ public class Hand implements Serializable {
 
     public void addCardColletion(List<Card> listOfCards){
         for (Card card: listOfCards) {
-            increaseSuitCount(card.getSuit());
             cardAdditionMethod(card);
         }
     }
@@ -50,11 +59,28 @@ public class Hand implements Serializable {
         return handOfCards;
     }
 
+    public int getCurrentClubCount(){
+        return currentDiamondCount;
+    }
+
+    public int getCurrentDiamondCount(){
+        return currentDiamondCount;
+    }
+
+    public int getCurrentHeartCount(){
+        return currentDiamondCount;
+    }
+
+    public int getCurrentSpadeCount(){
+        return currentDiamondCount;
+    }
+
+
     public void addHand(Hand handOfCards){
         for (Card card: handOfCards.getHandOfCards()) {
             increaseSuitCount(card.getSuit());
             this.handOfCards.add(card);
-            currentHandCount += card.getRank().getRankValue();
+            //currentHandCount += card.getRank().getRankValue();
         }
     }
 
@@ -71,16 +97,16 @@ public class Hand implements Serializable {
         }
     }
 
-    public void cardSubtractionMethod(Card card){
+    private void cardSubtractionMethod(Card card){
+        handOfCards.remove(card);
         decreaseSuitCount(card.getSuit());
-        currentHandCount -= card.getRank().getRankValue();
+        //currentHandCount -= card.getRank().getRankValue();
     }
 
     public boolean removeSingleCard(Card card){
         boolean containsCard = handOfCards.contains(card);
         if(containsCard){
             cardSubtractionMethod(card);
-            handOfCards.remove(card);
         }
         return containsCard;
     }
@@ -97,7 +123,7 @@ public class Hand implements Serializable {
         if(containsHand){
             for (Card card:handOfCards.getHandOfCards()) {
                 decreaseSuitCount(card.getSuit());
-                currentHandCount -= card.getRank().getRankValue();
+                //currentHandCount -= card.getRank().getRankValue();
                 this.handOfCards.remove(card);
             }
         }
