@@ -85,8 +85,23 @@ public class Hand implements Serializable {
         return containsCard;
     }
 
-    public boolean removeAnotherHand(){
-
+    public boolean removeAnotherHand(Hand handOfCards){
+        boolean containsHand = false;
+        for (Card card: handOfCards.getHandOfCards()) {
+            if(this.handOfCards.contains(card)){
+                containsHand = true;
+            }else{
+                return false;
+            }
+        }
+        if(containsHand){
+            for (Card card:handOfCards.getHandOfCards()) {
+                decreaseSuitCount(card.getSuit());
+                currentHandCount -= card.getRank().getRankValue();
+                this.handOfCards.remove(card);
+            }
+        }
+        return true;
     }
 
     public Card removeSpecificPosition(int index){
