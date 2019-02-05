@@ -3,9 +3,11 @@ package com.company;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-public class Hand implements Serializable {
+public class Hand implements Serializable, Iterable<Card> {
     private static final long serialVersionUID = 300L;
 
     private ArrayList<Card> handOfCards;
@@ -149,4 +151,37 @@ public class Hand implements Serializable {
         }
     }
 
+    @Override
+    public Iterator<Card> iterator() {
+        return new TraverseHandIterator(this);
+    }
+
+    public static class TraverseHandIterator implements Iterator<Card> {
+        private Hand handOfCards;
+        private int currentPosition;
+
+        TraverseHandIterator(Hand handOfCards){
+            this.handOfCards = handOfCards;
+            currentPosition = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentPosition < handOfCards.getHandOfCards().size()
+                    && handOfCards.getHandOfCards().get(currentPosition) != null;
+        }
+
+        @Override
+        public Card next() {
+            if(currentPosition >= handOfCards.getHandOfCards().size()){
+                throw new NoSuchElementException( "Hand doesn't have anymore cards" );
+            }
+            return handOfCards.getHandOfCards().get(currentPosition++);
+        }
+
+        @Override
+        public void remove() {
+            handOfCards.getHandOfCards().remove(currentPosition);
+        }
+    }
 }
