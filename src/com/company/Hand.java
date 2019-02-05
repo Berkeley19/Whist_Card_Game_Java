@@ -184,4 +184,16 @@ public class Hand implements Serializable, Iterable<Card> {
             handOfCards.getHandOfCards().remove(currentPosition);
         }
     }
+
+    public void sort(){
+        handOfCards.sort(Card::compareTo);
+    }
+
+    public void sortByRank(){
+        handOfCards.sort(Card.CompareRank.rankComparator);
+    }
+
+    public int countSuit(){
+        return 0;
+    }
 }

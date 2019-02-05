@@ -130,7 +130,6 @@ public class Card implements Serializable, Comparable<Card> {
     }
 
     public static int compareGreaterCard(Card card1, Card card2){
-        //System.out.println(card1 + " " + card2 + "ascending");
         if (card1.getRank().getRankValue() > card2.getRank().getRankValue()) {
             return 1;
         } else if (isRankEqual(card1,card2)) {
