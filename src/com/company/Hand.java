@@ -205,7 +205,7 @@ public class Hand implements Serializable, Iterable<Card> {
 
     public int countRank(Card.Rank rankOfCard){
         int countOfRank = 0;
-        for (Card card:handOfCards) {
+        for (Card card: handOfCards) {
             if(rankOfCard == card.getRank()){
                 countOfRank++;
             }
@@ -213,7 +213,15 @@ public class Hand implements Serializable, Iterable<Card> {
         return countOfRank;
     }
 
-    
+    public boolean hasSuit(Card.Suit cardSuit){
+        for(Card card: handOfCards){
+            if(cardSuit == card.getSuit()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 
 
