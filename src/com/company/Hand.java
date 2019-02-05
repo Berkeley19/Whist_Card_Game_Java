@@ -28,29 +28,38 @@ public class Hand implements Serializable {
         this.handOfCards = new ArrayList<>();
 
     }
+    
     public void cardAdditionMethod(Card card){
         handOfCards.add(card);
         currentHandCount += card.getRank().getRankValue();
     }
+
     public void addSingleCard(Card card){
-        increaseSuitCount(card);
+        increaseSuitCount(card.getSuit());
         cardAdditionMethod(card);
     }
 
     public void addCardColletion(List<Card> listOfCards){
         for (Card card: listOfCards) {
-            increaseSuitCount(card);
+            increaseSuitCount(card.getSuit());
             cardAdditionMethod(card);
         }
     }
 
-    public void addHand(){
-
+    public ArrayList<Card> getHandOfCards(){
+        return handOfCards;
     }
 
-    public void increaseSuitCount(Card card){
-        Card.Suit suit = card.getSuit();
-        switch(suit){
+    public void addHand(Hand handOfCards){
+        for (Card card: handOfCards.getHandOfCards()) {
+            increaseSuitCount(card.getSuit());
+            this.handOfCards.add(card);
+            currentHandCount += card.getRank().getRankValue();
+        }
+    }
+
+    public void increaseSuitCount(Card.Suit cardSuit){
+        switch(cardSuit){
             case CLUBS: currentClubCount++;
                 break;
             case DIAMONDS: currentDiamondCount++;
@@ -71,6 +80,10 @@ public class Hand implements Serializable {
     }
 
     public Card removeSpecificPosition(int index){
+
+    }
+
+    public void decreaseSuitCount(){
 
     }
 
