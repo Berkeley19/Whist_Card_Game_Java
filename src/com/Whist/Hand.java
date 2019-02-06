@@ -41,20 +41,17 @@ public class Hand implements Serializable, Iterable<Card> {
                 aceCount++;
             }
         }
+        if(this.currentHandCount.size()==0){
+            this.currentHandCount.add(0);
+        }
         if(!(aceCount==0)) {
-            currentHandCount.add(0);
+            this.currentHandCount.add(0);
             for (int i = 0; i <= aceCount; i++) {
-                int newValue = tempTotalCount + (aceCount - i) + (i * 11);
-                currentHandCount.set(i, newValue);
+                this.currentHandCount.set(i,tempTotalCount + (aceCount - i) + (i * 11));
             }
         }else{
-            if(currentHandCount.size()==0){
-                currentHandCount.add(0);
-            }
-            for(int i=0; i<currentHandCount.size(); i++){
-                int oldValue = currentHandCount.get(i);
-                int newValue = oldValue + tempHandCount;
-                currentHandCount.set(i, newValue);
+            for(int i=0; i<this.currentHandCount.size(); i++){
+                this.currentHandCount.set(i, this.currentHandCount.get(i)+ tempHandCount);
             }
         }
     }
@@ -118,7 +115,6 @@ public class Hand implements Serializable, Iterable<Card> {
     }
 
     private void cardSubtractionMethod(Card card){
-        System.out.println(this.handOfCards);
         for (int i=0; i<this.handOfCards.size(); i++) {
             if(this.handOfCards.get(i).toString().equals(card.toString())){
                 this.handOfCards.remove(i);
@@ -137,10 +133,12 @@ public class Hand implements Serializable, Iterable<Card> {
         //contains and remove wasn't working
         //so had to get the indexes instead of the Card objects themselves
         ArrayList<Integer> indexArray = new ArrayList<>();
+        ArrayList<Card> futureRemoval = new ArrayList<>();
         for (int i=0; i<this.handOfCards.size(); i++) {
             for (Card card: handOfCards.getHandOfCards()) {
                 if(this.handOfCards.get(i).toString().equals(card.toString())){
                     indexArray.add(i);
+                    futureRemoval.add(card);
                 }
             }
         }
@@ -151,6 +149,9 @@ public class Hand implements Serializable, Iterable<Card> {
         indexArray.sort(cmp);
         for (int index: indexArray) {
             this.handOfCards.remove(this.handOfCards.get(index));
+        }
+        for(Card card: futureRemoval){
+            cardSubtractionMethod(card);
         }
         return true;
 
@@ -275,6 +276,8 @@ public class Hand implements Serializable, Iterable<Card> {
         System.out.println(hand.currentHandCount + " should = 39");
         hand.addSingleCard(new Card(Card.Rank.ACE, Card.Suit.SPADES));
         System.out.println(hand.currentHandCount + " should = [40, 50]");
+        hand.addSingleCard(new Card(Card.Rank.ACE, Card.Suit.DIAMONDS));
+        System.out.println(hand.currentHandCount + " should = [41, 51, 61]");
         Hand hand1 = new Hand(cardList);
         System.out.println(hand1 + "  -same as cardList-  " + cardList.toString());
         System.out.println(hand);
@@ -293,7 +296,9 @@ public class Hand implements Serializable, Iterable<Card> {
         System.out.println(hand);
         System.out.println(hand.removeSpecificPosition(3) + " Seven of Clubs removed");
         System.out.println(hand + " Four of diamonds should be here");
+        System.out.println(hand.getCurrentHandCount() + "-hand count");
         System.out.println(hand.removeSingleCard(card1));
+        System.out.println(hand.getCurrentHandCount() + "-hand count");
         System.out.println(hand + " Four of diamond should be gone");
         Hand anotherHand = new Hand();
         anotherHand.addSingleCard(new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
@@ -307,11 +312,12 @@ public class Hand implements Serializable, Iterable<Card> {
             System.out.println(itr.next() + "- hand - " + index);
             index++;
         }
-        System.out.println(hand.removeSpecificPosition(0));
-        System.out.println(hand);
-
-
-
+        System.out.println(hand.getHandOfCards() + "-hand");
+        System.out.println(hand.getCurrentHandCount() + "-hand count");
+        System.out.println(hand.getCurrentClubCount() + "-club count");
+        System.out.println(hand.getCurrentHeartCount() + "-heart count");
+        System.out.println(hand.getCurrentDiamondCount() + "-diamond count");
+        System.out.println(hand.getCurrentSpadeCount() + "-spade count");
     }
 
 
