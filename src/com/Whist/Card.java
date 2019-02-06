@@ -1,4 +1,4 @@
-package com.company;
+package com.Whist;
 
 import java.io.Serializable;
 import java.util.Comparator;

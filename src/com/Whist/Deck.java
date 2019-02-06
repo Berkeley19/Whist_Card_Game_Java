@@ -1,4 +1,4 @@
-package com.company;
+package com.Whist;
 
 import java.io.*;
 import java.util.ArrayList;

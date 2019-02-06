@@ -1,4 +1,4 @@
-package com.company;
+package com.Whist;
 
 import java.io.Serializable;
 import java.util.*;
@@ -11,7 +11,7 @@ public class Hand implements Serializable, Iterable<Card> {
     private int currentSpadeCount;
     private int currentClubCount;
     private int currentHeartCount;
-    private ArrayList<Integer> currentHandCount;
+    private ArrayList<Integer> currentHandCount = new ArrayList<>();
 
 
     public Hand(){
@@ -32,15 +32,30 @@ public class Hand implements Serializable, Iterable<Card> {
     private void calculateCurrentHandCount(){
         int tempHandCount = 0;
         int aceCount = 0;
-        for (Card c: handOfCards) {
-            if(c.getRank()!=Card.Rank.ACE){
-                tempHandCount += c.getRank().getRankValue();
+        int tempTotalCount = 0;
+        for (Card card: this.handOfCards) {
+            if(card.getRank()!=Card.Rank.ACE){
+                tempHandCount = card.getRank().getRankValue();
+                tempTotalCount += card.getRank().getRankValue();
             }else{
                 aceCount++;
             }
         }
-        for(int i=0; i<aceCount; i++){
-            currentHandCount.add(tempHandCount + (aceCount-i) + (i*11));
+        if(!(aceCount==0)) {
+            currentHandCount.add(0);
+            for (int i = 0; i <= aceCount; i++) {
+                int newValue = tempTotalCount + (aceCount - i) + (i * 11);
+                currentHandCount.set(i, newValue);
+            }
+        }else{
+            if(currentHandCount.size()==0){
+                currentHandCount.add(0);
+            }
+            for(int i=0; i<currentHandCount.size(); i++){
+                int oldValue = currentHandCount.get(i);
+                int newValue = oldValue + tempHandCount;
+                currentHandCount.set(i, newValue);
+            }
         }
     }
 
@@ -63,6 +78,8 @@ public class Hand implements Serializable, Iterable<Card> {
     public ArrayList<Card> getHandOfCards(){
         return handOfCards;
     }
+
+    public ArrayList<Integer> getCurrentHandCount(){return currentHandCount;}
 
     public int getCurrentClubCount(){
         return currentDiamondCount;
@@ -102,8 +119,11 @@ public class Hand implements Serializable, Iterable<Card> {
 
     private void cardSubtractionMethod(Card card){
         System.out.println(this.handOfCards);
-        this.handOfCards.remove(card);
-        System.out.println(this.handOfCards);
+        for (int i=0; i<this.handOfCards.size(); i++) {
+            if(this.handOfCards.get(i).toString().equals(card.toString())){
+                this.handOfCards.remove(i);
+            }
+        }
         decreaseSuitCount(card.getSuit());
         calculateCurrentHandCount();
     }
@@ -250,12 +270,16 @@ public class Hand implements Serializable, Iterable<Card> {
         cardList.add(new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
         cardList.add(new Card(Card.Rank.TEN, Card.Suit.CLUBS));
         System.out.println(cardList);
+        hand.addCardCollection(cardList);
+        System.out.println(hand.currentDiamondCount + " should = 2");
+        System.out.println(hand.currentHandCount + " should = 39");
+        hand.addSingleCard(new Card(Card.Rank.ACE, Card.Suit.SPADES));
+        System.out.println(hand.currentHandCount + " should = [40, 50]");
         Hand hand1 = new Hand(cardList);
         System.out.println(hand1 + "  -same as cardList-  " + cardList.toString());
         System.out.println(hand);
         Hand hand2= new Hand(hand);
         System.out.println(hand2 + "  -same as hand-  " + hand.toString());
-        hand.addCardCollection(cardList);
         System.out.println(hand);
         System.out.println(hand.countRank(Card.Rank.ACE ) + " should = 0");
         System.out.println(hand.countRank(Card.Rank.FOUR ) + " should = 3");
@@ -269,7 +293,7 @@ public class Hand implements Serializable, Iterable<Card> {
         System.out.println(hand);
         System.out.println(hand.removeSpecificPosition(3) + " Seven of Clubs removed");
         System.out.println(hand + " Four of diamonds should be here");
-        System.out.println(hand.removeSingleCard(hand.getHandOfCards().get(3)));
+        System.out.println(hand.removeSingleCard(card1));
         System.out.println(hand + " Four of diamond should be gone");
         Hand anotherHand = new Hand();
         anotherHand.addSingleCard(new Card(Card.Rank.TEN, Card.Suit.DIAMONDS));
