@@ -7,7 +7,7 @@ public class BasicPlayer implements Player{
     int id;
     Strategy strat;
 
-    public BasicPlayer(Strategy strategy, Hand hand, int id){
+    public BasicPlayer(BasicStrategy strategy, Hand hand, int id){
         this.strat = strategy;
         this.hand = hand;
         this.id = id;

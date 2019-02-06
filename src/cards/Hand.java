@@ -13,22 +13,22 @@ public class Hand implements Serializable, Iterable<Card> {
     private int currentHeartCount;
     private ArrayList<Integer> currentHandCount = new ArrayList<>();
 
-
+    //empty constructor returns empty list
     public Hand(){
         handOfCards = new ArrayList<>();
     }
 
-
+    //contructor taking in list and adds it to hand
     public Hand(ArrayList<Card> arrayOfCards){
         handOfCards = new ArrayList<>();
         addCardCollection(arrayOfCards);
     }
-
+    //constructor takes in hand and adds it to another
     public Hand(Hand handOfCards){
         this.handOfCards = new ArrayList<>();
         addHand(handOfCards);
     }
-
+    //calculates the hand count
     private void calculateCurrentHandCount(boolean addition){
         int tempHandCount = 0;
         int aceCount = 0;
@@ -57,17 +57,17 @@ public class Hand implements Serializable, Iterable<Card> {
             }
         }
     }
-
+    //is called everytime a card is added to deck
     private void cardAdditionMethod(Card card){
         this.handOfCards.add(card);
         increaseSuitCount(card.getSuit());
         calculateCurrentHandCount(true);
     }
-
+    //adds single single card to deck
     public void addSingleCard(Card card){
         cardAdditionMethod(card);
     }
-
+    //adds entire list to deck
     public void addCardCollection(List<Card> listOfCards){
         for (Card card: listOfCards) {
             cardAdditionMethod(card);
@@ -96,14 +96,14 @@ public class Hand implements Serializable, Iterable<Card> {
         return currentDiamondCount;
     }
 
-
-    public void addHand(Hand handOfCards){
+    //adds hand to another hand
+    private void addHand(Hand handOfCards){
         for (Card card: handOfCards.getHandOfCards()) {
             cardAdditionMethod(card);
         }
     }
-
-    public void increaseSuitCount(Card.Suit cardSuit){
+    //increments the count of specifc suit
+    private void increaseSuitCount(Card.Suit cardSuit){
         switch(cardSuit){
             case CLUBS: currentClubCount++;
                 break;
@@ -115,7 +115,7 @@ public class Hand implements Serializable, Iterable<Card> {
                 break;
         }
     }
-
+    //called every time card is removed from deck
     private void cardSubtractionMethod(Card card){
         for (int i=0; i<this.handOfCards.size(); i++) {
             if(this.handOfCards.get(i).toString().equals(card.toString())){
@@ -125,12 +125,12 @@ public class Hand implements Serializable, Iterable<Card> {
         decreaseSuitCount(card.getSuit());
         calculateCurrentHandCount(false);
     }
-
+    //remove single card from deck
     public boolean removeSingleCard(Card card){
         cardSubtractionMethod(card);
         return true;
     }
-
+    //remove another hand from a deck
     public boolean removeAnotherHand(Hand handOfCards){
         //contains and remove wasn't working
         //so had to get the indexes instead of the Card objects themselves
@@ -158,15 +158,15 @@ public class Hand implements Serializable, Iterable<Card> {
         return true;
 
     }
-
-    public Card removeSpecificPosition(int cardIndex){
+    //remove specifc position from deck
+    private Card removeSpecificPosition(int cardIndex){
         Card card = handOfCards.get(cardIndex);
         System.out.println(card);
         cardSubtractionMethod(card);
         return card;
     }
-
-    public void decreaseSuitCount(Card.Suit cardSuit){
+    //decrements a suit count
+    private void decreaseSuitCount(Card.Suit cardSuit){
         switch(cardSuit){
             case CLUBS: currentClubCount--;
                 break;
@@ -183,7 +183,7 @@ public class Hand implements Serializable, Iterable<Card> {
     public Iterator<Card> iterator() {
         return new TraverseHandIterator(this);
     }
-
+    //custom iterator
     public static class TraverseHandIterator implements Iterator<Card> {
         private Hand handOfCards;
         private int currentPosition;
@@ -213,15 +213,15 @@ public class Hand implements Serializable, Iterable<Card> {
         }
     }
 
-    public void sort(){
+    private void sort(){
         handOfCards.sort(Card::compareTo);
     }
 
     public void sortByRank(){
         handOfCards.sort(Card.CompareRank.rankComparator);
     }
-
-    public int countSuit(Card.Suit suit){
+    //counts the number of times suit occurs
+    private int countSuit(Card.Suit suit){
         switch (suit){
             case HEARTS: return currentHeartCount;
             case SPADES: return currentSpadeCount;
@@ -230,8 +230,8 @@ public class Hand implements Serializable, Iterable<Card> {
             default: return 0;
         }
     }
-
-    public int countRank(Card.Rank rankOfCard){
+    //counts the rank of a card
+    private int countRank(Card.Rank rankOfCard){
         int countOfRank = 0;
         for (Card card: handOfCards) {
             if(rankOfCard == card.getRank()){
@@ -240,8 +240,8 @@ public class Hand implements Serializable, Iterable<Card> {
         }
         return countOfRank;
     }
-
-    public boolean hasSuit(Card.Suit cardSuit){
+    //checks if it has a suit
+    private boolean hasSuit(Card.Suit cardSuit){
         for(Card card: handOfCards){
             if(cardSuit == card.getSuit()){
                 return true;
@@ -260,7 +260,7 @@ public class Hand implements Serializable, Iterable<Card> {
         string.append("END OF HAND||");
         return string.toString();
     }
-
+    //testing
     public static void main(String[] args){
         Hand hand = new Hand();
         hand.addSingleCard(new Card(Card.Rank.SEVEN, Card.Suit.CLUBS));
