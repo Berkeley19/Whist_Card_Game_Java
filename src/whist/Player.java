@@ -1,6 +1,7 @@
 package whist;
 
 import cards.Card;
+import cards.Hand;
 
 public interface Player {
     //add card to player hand
@@ -10,7 +11,7 @@ public interface Player {
     void removeCardFromHand(Card card);
 
     //removes hand from player's hand
-    void removeHandFromHand(Card card);
+    void removeHandFromHand(Hand hand);
 
     //Changes strategy of play
     void setStrategy(Strategy strategy);
@@ -20,7 +21,7 @@ public interface Player {
     Card playCard(Trick trick);
 
     //Player sent completed trick
-    void viewTrick(Trick trick);
+    void seeTrick(Trick trick);
 
     //Make the trump card
     void makeTrump();
