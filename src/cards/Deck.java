@@ -152,7 +152,7 @@ public class Deck implements Iterable<Card>, Serializable {
         while(itr2.hasNext()){
             Card nextCard = itr2.next();
             deck1.getDeckOfCards().add(nextCard);
-            System.out.println(nextCard + "just spades");
+            System.out.println(nextCard + " just spades");
         }
         System.out.println("Spade deck-" + deck1);
         try{

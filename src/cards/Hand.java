@@ -29,7 +29,7 @@ public class Hand implements Serializable, Iterable<Card> {
         addHand(handOfCards);
     }
 
-    private void calculateCurrentHandCount(){
+    private void calculateCurrentHandCount(boolean addition){
         int tempHandCount = 0;
         int aceCount = 0;
         int tempTotalCount = 0;
@@ -45,7 +45,9 @@ public class Hand implements Serializable, Iterable<Card> {
             this.currentHandCount.add(0);
         }
         if(!(aceCount==0)) {
-            this.currentHandCount.add(0);
+            if(addition){
+                this.currentHandCount.add(0);
+            }
             for (int i = 0; i <= aceCount; i++) {
                 this.currentHandCount.set(i,tempTotalCount + (aceCount - i) + (i * 11));
             }
@@ -59,7 +61,7 @@ public class Hand implements Serializable, Iterable<Card> {
     private void cardAdditionMethod(Card card){
         this.handOfCards.add(card);
         increaseSuitCount(card.getSuit());
-        calculateCurrentHandCount();
+        calculateCurrentHandCount(true);
     }
 
     public void addSingleCard(Card card){
@@ -121,7 +123,7 @@ public class Hand implements Serializable, Iterable<Card> {
             }
         }
         decreaseSuitCount(card.getSuit());
-        calculateCurrentHandCount();
+        calculateCurrentHandCount(false);
     }
 
     public boolean removeSingleCard(Card card){
