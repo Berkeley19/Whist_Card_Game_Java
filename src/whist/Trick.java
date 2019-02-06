@@ -41,13 +41,17 @@ public class Trick {
         return cardsOfTrick[index];
     }
 
-    public Card sortWinningTrick(ArrayList<Card> cardToSort){
+    public Card.Suit getSuitOfFirstCard(){
+        return firstCard.getSuit();
+    }
+    private Card sortWinningTrick(ArrayList<Card> cardToSort){
         int sizeOfList = cardToSort.size();
         cardToSort.sort(Card::compareTo);
-        return cardToSort.get(sizeOfList);
+        return cardToSort.get(sizeOfList-1);
     }
 
-    public int calculateWinningTrickCard(){
+    //finds playerId of final trick winner
+    private int calculateWinningTrickCard(){
         ArrayList<Card> nonTrumpCards = new ArrayList<>();
         ArrayList<Card> trumpCards = new ArrayList<>();
         boolean equalsTrump = false;
@@ -55,7 +59,7 @@ public class Trick {
 
         for (Card card: cardsOfTrick) {
             try {
-                if(firstCard.getSuit().equals(card.getSuit())){
+                if(getSuitOfFirstCard().equals(card.getSuit())){
                     nonTrumpCards.add(card);
                 }
                 if(trumpSuit.equals(card.getSuit())){
@@ -77,10 +81,38 @@ public class Trick {
             }
             winningTrickCard[0] = sortWinningTrick(trumpCards);
         }
-        List<Card> cardsOfTrickList = new ArrayList<Card>(Arrays.asList(cardsOfTrick));
+        List<Card> cardsOfTrickList = new ArrayList<>(Arrays.asList(cardsOfTrick));
         return cardsOfTrickList.indexOf(winningTrickCard[0]);
     }
 
+    public Card getPlayerCard(Player player){
+        return cardsOfTrick[player.getId()];
+    }
+    //Saves newly placed card from player into trick
+    public void recordCard(Card card, Player player){
+        getPlayerCard(player);
+        if(firstPlayer==player.getId()){
+            firstCard = card;
+        }
+        highestCard = cardsOfTrick[calculateWinningTrickCard()];
+    }
 
+    public void emptyTrick(){
+        cardsOfTrick = new Card[4];
+    }
 
+    @Override
+    public String toString() {
+        return Arrays.toString(cardsOfTrick) + "-cards of trick" + "\n" +
+                trumpSuit + "-Trump Suit" + "\n" +
+                firstPlayer + "-First Player" + "\n" +
+                firstCard + "-First Card" + "\n" +
+                highestCard + "-Highest Card in Trick";
+    }
+
+    public static void main(String[] args) {
+        Trick trick = new Trick(1);
+        Card[] cards = new Card[4];
+
+    }
 }
