@@ -1,4 +1,4 @@
-package com.Whist;
+package cards;
 
 import java.io.*;
 import java.util.ArrayList;

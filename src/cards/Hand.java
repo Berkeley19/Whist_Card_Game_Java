@@ -1,4 +1,4 @@
-package com.Whist;
+package cards;
 
 import java.io.Serializable;
 import java.util.*;
